@@ -1,0 +1,77 @@
+[
+    {
+        "id": 1,
+        "question": "Какие языки программирования вы знаете?",
+        "type": "multiple",
+        "answer1": "JavaScript",
+        "answer2": "Python",
+        "answer3": "PHP"
+    },
+    {
+        "id": 2,
+        "question": "Самое большое животное в мире?",
+        "type": "single",
+        "answer1": "Слон",
+        "answer2": "Бегемот",
+        "answer3": "Лев"
+    },
+    {
+        "id": 3,
+        "question": "Напишите краткий ответ на этот вопрос.",
+        "type": "short"
+    },
+    {
+        "id": 4,
+        "question": "Напишите развёрнутый ответ на этот вопрос.",
+        "type": "long"
+    },
+    {
+        "id": 5,
+        "question": "Что из этого цифра?",
+        "type": "single",
+        "answer1": "10",
+        "answer2": "11",
+        "answer3": "9"
+    },
+    {
+        "id": 6,
+        "question": "Какое свойтсво не существует у display?",
+        "type": "single",
+        "answer1": "grid",
+        "answer2": "inline-block",
+        "answer3": "container"
+    },
+    {
+        "id": 7,
+        "question": "Что делает обработчик событий onClick?",
+        "type": "single",
+        "answer1": "Отправляет форму",
+        "answer2": "Красит HTML элемент",
+        "answer3": "Обрабатывает клик по элементу"
+    },
+    {
+        "id": 8,
+        "question": "Кто из них не герой Marvel?",
+        "type": "single",
+        "answer1": "Железный человек",
+        "answer2": "Капитан Америка",
+        "answer3": "Рассомаха"
+    },
+    {
+        "id": 9,
+        "question": "Что едят на масленницу?",
+        "type": "single",
+        "answer1": "Кабачки",
+        "answer2": "Блинчики",
+        "answer3": "Лазанью"
+    },
+    {
+        "id": 10,
+        "question": "Где находится картина Мона Лиза?",
+        "type": "single",
+        "answer1": "Лувр",
+        "answer2": "Третьяковская галлерея",
+        "answer3": "Белый дом"
+    }
+]
+
