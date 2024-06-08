@@ -121,7 +121,7 @@ const Questions: React.FC<QuestionsProps> = ({ onStopTimer, onStartTimer }) => {
   };
 
   return (
-    <div className={styles.questionsContainer}>
+    <div>
       <ProgressBar total={questions.length} current={index} />
       {questions.length > 0 && index < questions.length ? (
         <>

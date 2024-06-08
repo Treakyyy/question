@@ -12,31 +12,28 @@ interface TimerProps {}
 export interface TimerHandle {
   resetTimer: () => void;
   stopTimer: () => void;
+  startTimer: () => void;
 }
 
 const Timer = forwardRef<TimerHandle, TimerProps>((props, ref: ForwardedRef<TimerHandle>) => {
-  const [seconds, setSeconds] = useState(0);
-  const [minutes, setMinutes] = useState(0);
+  const [elapsedTime, setElapsedTime] = useState(0);
   const [isRunning, setIsRunning] = useState(true);
 
   useEffect(() => {
-    const savedSeconds = localStorage.getItem('seconds');
-    const savedMinutes = localStorage.getItem('minutes');
-
-    if (savedSeconds !== null && savedMinutes !== null) {
-      setSeconds(parseInt(savedSeconds, 10));
-      setMinutes(parseInt(savedMinutes, 10));
+    const savedStartTime = localStorage.getItem('startTime');
+    const savedElapsedTime = localStorage.getItem('elapsedTime');
+    
+    if (savedStartTime) {
+      const startTime = parseInt(savedStartTime, 10);
+      const currentTime = Date.now();
+      const elapsed = Math.floor((currentTime - startTime) / 1000);
+      const totalElapsedTime = (savedElapsedTime ? parseInt(savedElapsedTime, 10) : 0) + elapsed;
+      setElapsedTime(totalElapsedTime);
     }
 
     const interval = setInterval(() => {
       if (isRunning) {
-        setSeconds((prevSeconds) => {
-          if (prevSeconds === 59) {
-            setMinutes((prevMinutes) => prevMinutes + 1);
-            return 0;
-          }
-          return prevSeconds + 1;
-        });
+        setElapsedTime((prevElapsedTime) => prevElapsedTime + 1);
       }
     }, 1000);
 
@@ -44,20 +41,30 @@ const Timer = forwardRef<TimerHandle, TimerProps>((props, ref: ForwardedRef<Time
   }, [isRunning]);
 
   useEffect(() => {
-    localStorage.setItem('seconds', seconds.toString());
-    localStorage.setItem('minutes', minutes.toString());
-  }, [seconds, minutes]);
+    if (isRunning) {
+      localStorage.setItem('startTime', Date.now().toString());
+      localStorage.setItem('elapsedTime', elapsedTime.toString());
+    }
+  }, [elapsedTime, isRunning]);
 
   useImperativeHandle(ref, () => ({
     resetTimer() {
-      setSeconds(0);
-      setMinutes(0);
+      setElapsedTime(0);
       setIsRunning(true);
+      localStorage.removeItem('startTime');
+      localStorage.removeItem('elapsedTime');
     },
     stopTimer() {
       setIsRunning(false);
     },
+    startTimer() {
+      setIsRunning(true);
+      localStorage.setItem('startTime', Date.now().toString());
+    },
   }));
+
+  const minutes = Math.floor(elapsedTime / 60);
+  const seconds = elapsedTime % 60;
 
   return (
     <div className={styles.timer}>

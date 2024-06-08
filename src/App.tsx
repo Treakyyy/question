@@ -6,6 +6,7 @@ import './App.css';
 interface TimerRef {
   resetTimer: () => void;
   stopTimer: () => void;
+  startTimer: () => void;
 }
 
 const App: React.FC = () => {
@@ -23,10 +24,16 @@ const App: React.FC = () => {
     }
   }
 
+  const handleStartTimer = () => {
+    if (timerRef.current) {
+      timerRef.current.startTimer();
+    }
+  }
+
   return (
     <div className="App">
       <Header timerRef={timerRef} />
-      <Questions onStopTimer={handleStopTimer} onStartTimer={handleResetTimer} />
+      <Questions onStopTimer={handleStopTimer} onStartTimer={handleStartTimer} />
     </div>
   );
 }
